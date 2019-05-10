@@ -1,0 +1,37 @@
+##################################################################################################
+# httpbin service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpbin2
+  labels:
+    app: httpbin2
+spec:
+  ports:
+  - name: http
+    port: 8000
+    targetPort: 80
+  selector:
+    app: httpbin2
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: httpbin2
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: httpbin2
+        version: v1
+    spec:
+      containers:
+      - image: registry.sloth.com/kennethreitz/httpbin
+        imagePullPolicy: IfNotPresent
+        name: httpbin2
+        ports:
+        - containerPort: 80

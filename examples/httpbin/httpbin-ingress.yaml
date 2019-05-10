@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: httpbin
+spec:
+  rules:
+  - host: httpbin.sloth.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: httpbin
+          servicePort: 8000
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: httpbin2
+spec:
+  rules:
+  - host: httpbin2.sloth.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: httpbin2
+          servicePort: 8000
